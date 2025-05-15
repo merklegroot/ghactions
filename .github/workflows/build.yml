@@ -25,4 +25,13 @@ jobs:
       run: dotnet build src/SomeActionApi/SomeActionApi.csproj --no-restore
       
     - name: Test
-      run: dotnet test src/SomeActionApi/SomeActionApi.csproj --no-build --verbosity normal 
+      run: dotnet test src/SomeActionApi/SomeActionApi.csproj --no-build --verbosity normal
+
+    - name: Publish
+      run: dotnet publish src/SomeActionApi/SomeActionApi.csproj -c Release -o publish
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: app-build
+        path: publish/ 
